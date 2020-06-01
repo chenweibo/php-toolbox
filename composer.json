@@ -8,6 +8,7 @@
       "email": "563960993@qq.com"
     }
   ],
+  "minimum-stability": "dev",
   "require": {
     "php": ">=7.1.32",
     "league/flysystem": "^1.0.47"
