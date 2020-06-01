@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpUtils\Module\Support;
+namespace Toolbox\Module\Support;
 
 use ArrayAccess;
 use JsonSerializable;

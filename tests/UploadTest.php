@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpUtils;
+namespace Toolbox;
 
 use PHPUnit\Framework\TestCase;
 use PhpUtils\Module\Upload\UploadResolver;

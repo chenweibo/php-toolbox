@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpUtils\Module\Upload;
+namespace Toolbox\Module\Upload;
 
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;

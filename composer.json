@@ -1,5 +1,5 @@
 {
-  "name": "xiaobozi/php-utils",
+  "name": "xiaobozi/php-toolbox",
   "description": "php common tools package",
   "type": "project",
   "license": "MIT",
@@ -24,12 +24,12 @@
   },
   "autoload": {
     "psr-4": {
-      "PhpUtils\\": "src/"
+      "Toolbox\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "PhpUtils\\Tests\\": "tests/"
+      "Toolbox\\Tests\\": "tests/"
     }
   },
   "scripts": {

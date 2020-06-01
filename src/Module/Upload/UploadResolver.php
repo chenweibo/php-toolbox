@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpUtils\Module\Upload;
+namespace Toolbox\Module\Upload;
 
 class UploadResolver
 {
