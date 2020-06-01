@@ -3,7 +3,7 @@
 namespace Toolbox;
 
 use PHPUnit\Framework\TestCase;
-use PhpUtils\Module\Upload\UploadResolver;
+use Toolbox\Module\Upload\UploadResolver;
 
 class UploadTest extends TestCase
 {

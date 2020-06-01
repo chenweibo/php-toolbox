@@ -4,7 +4,7 @@ namespace Toolbox\Module\Upload;
 
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
-use PhpUtils\Module\Support\Fluent;
+use Toolbox\Module\Support\Fluent;
 
 class Upload
 {
