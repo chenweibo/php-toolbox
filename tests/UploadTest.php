@@ -11,7 +11,7 @@ class UploadTest extends TestCase
     public function testUpload()
     {
         $config = include __DIR__.'/config.php';
-        $path = UploadResolver::resolveFromRequest($config['base']['config'], $config['base']['file'])->upload();
+        $path = UploadResolver::resolveFromRequest($config['base']['config'], $config['base']['file'])->upload('upload');
         $this->assertTrue(FileResolver::config($config['base']['config'])->has($path['path']));
     }
 

@@ -7,11 +7,11 @@ use Toolbox\Module\File\FileResolver;
 
 class FileTest extends TestCase
 {
-    public function testZip()
+    public function testUnzip()
     {
         $config = include __DIR__ . '/config.php';
         $system = FileResolver::config($config['base']['config']);
 
-        $this->assertFalse(false);
+        $this->assertTrue($system->unzip('un.zip', 'unzip'));
     }
 }
