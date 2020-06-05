@@ -108,9 +108,28 @@ class File
      */
     public function files($path)
     {
-        $oppositePath = $this->adapterPath.'/'.$path;
+        $fileList = array_diff(\scandir($this->getFullPath($path)), ['..', '.']);
 
-        return array_diff(\scandir($oppositePath), ['..', '.']);
+        return $this->handleFilesList($fileList);
+    }
+
+    public function handleFilesList(array $list)
+    {
+        $files = [];
+        foreach ($list as $v) {
+            $files[] = ['name' => $v, 'mime' => $this->mimeTypes($v), 'size' => $this->size($v)];
+        }
+
+        return $files;
+    }
+
+    public function getFullPath($path)
+    {
+        if ($path) {
+            return $this->adapterPath.'/'.$path;
+        }
+
+        return $this->adapterPath;
     }
 
     /**

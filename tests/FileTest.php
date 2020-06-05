@@ -14,4 +14,12 @@ class FileTest extends TestCase
 
         $this->assertTrue($system->unzip('un.zip', 'unzip'));
     }
+
+    public function testFiles()
+    {
+        $config = include __DIR__.'/config.php';
+        $system = FileResolver::config($config['base']['config'])->files('');
+        //var_dump($system);
+        $this->assertTrue(true);
+    }
 }
