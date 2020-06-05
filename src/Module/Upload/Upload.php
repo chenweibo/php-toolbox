@@ -3,8 +3,6 @@
 namespace Toolbox\Module\Upload;
 
 use League\Flysystem\Adapter\Local;
-use League\Flysystem\FileExistsException;
-use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 use Toolbox\Module\Support\Fluent;
 
@@ -34,6 +32,11 @@ class Upload
      * return League\Flysystem\Filesystem.
      */
     private $filesystem;
+
+    /**
+     * return League\Flysystem\Adapter\Local.
+     */
+    private $adapterPath;
 
     /**
      * @return array|mixed
@@ -100,6 +103,7 @@ class Upload
         $this->mimes = $config->get('mimes');
 
         $adapter = new Local($config->get('root_path'));
+        $this->adapterPath = $config->get('root_path');
         $filesystem = new Filesystem($adapter, ['visibility' => 'public']);
         $this->filesystem = $filesystem;
 
@@ -115,11 +119,11 @@ class Upload
             case 'original':
                 return $this->file['fileName'];
             case 'md5_file':
-                return md5_file($this->file['realPath']) . '.' . $this->file['ext'];
+                return md5_file($this->file['realPath']).'.'.$this->file['ext'];
                 break;
             case 'random':
             default:
-                return md5_file($this->file['realPath']) . '.' . $this->file['ext'];
+                return md5_file($this->file['realPath']).'.'.$this->file['ext'];
         }
     }
 
@@ -149,75 +153,5 @@ class Upload
         }
 
         return ['path' => $path, 'size' => $this->file['size']];
-    }
-
-    /**
-     * Rename Files.
-     *
-     * @param string $from
-     * @param string $to
-     *
-     * @return bool $response
-     *
-     * @throws FileExistsException
-     * @throws FileNotFoundException
-     */
-    public function rename($from, $to)
-    {
-        return $this->filesystem->rename($from, $to);
-    }
-
-    /**
-     * Create Directories.
-     *
-     * @param string $path
-     *
-     * @return bool $response
-     */
-    public function createDir($path)
-    {
-        return $this->filesystem->createDir($path);
-    }
-
-    /**
-     * Copy Files.
-     *
-     * @param string $from
-     * @param string $to
-     *
-     * @return bool $response
-     *
-     * @throws FileExistsException
-     * @throws FileNotFoundException
-     */
-    public function copy($from, $to)
-    {
-        return $this->filesystem->copy($from, $to);
-    }
-
-    /**
-     * Delete Directories.
-     *
-     * @param string $path
-     *
-     * @return bool $response
-     */
-    public function deleteDir($path)
-    {
-        return $this->filesystem->deleteDir($path);
-    }
-
-    /**
-     * Delete Files or Directories.
-     *
-     * @param string $path
-     *
-     * @return bool
-     *
-     * @throws FileNotFoundException
-     */
-    public function delete($path)
-    {
-        return $this->filesystem->delete($path);
     }
 }

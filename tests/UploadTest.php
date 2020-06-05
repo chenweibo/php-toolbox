@@ -3,39 +3,29 @@
 namespace Toolbox;
 
 use PHPUnit\Framework\TestCase;
+use Toolbox\Module\File\FileResolver;
 use Toolbox\Module\Upload\UploadResolver;
 
 class UploadTest extends TestCase
 {
     public function testUpload()
     {
-        $file = ['realPath' => __DIR__.'/test-files/1.png', 'fileName' => '1', 'mime' => 'image/png', 'size' => 1024 * 1024 * 3, 'ext' => 'png'];
-
-        $config = [
-            'filename_type' => 'md5_file', 'root_path' => __DIR__.'/test-files', 'max_size' => '4m',
-            'mimes' => ['image/jpeg', 'image/png', 'image/bmp', 'image/gif'], ];
-        UploadResolver::resolveFromRequest($config, $file)->upload();
+        $config = include __DIR__.'/config.php';
+        $path = UploadResolver::resolveFromRequest($config['base']['config'], $config['base']['file'])->upload();
+        $this->assertTrue(FileResolver::config($config['base']['config'])->has($path['path']));
     }
 
     public function testValidSize()
     {
-        $file = ['realPath' => __DIR__.'/test-files/1.png', 'fileName' => '1', 'mimes' => 'image/png', 'size' => 1024 * 1024 * 20, 'ext' => 'png'];
+        $config = include __DIR__.'/config.php';
 
-        $config = [
-            'filename_type' => 'md5_file', 'root_path' => __DIR__.'/test-files', 'max_size' => '10m',
-            'mimes' => ['image/jpeg', 'image/png', 'image/bmp', 'image/gif'], ];
-
-        $this->assertFalse(UploadResolver::resolveFromRequest($config, $file)->isValidSize());
+        $this->assertFalse(UploadResolver::resolveFromRequest($config['validSize']['config'], $config['validSize']['file'])->isValidSize());
     }
 
     public function testValidMimes()
     {
-        $file = ['realPath' => __DIR__.'/test-files/1.png', 'fileName' => '1', 'mime' => 'xxxx', 'size' => 1024 * 1024 * 20, 'ext' => 'png'];
+        $config = include __DIR__.'/config.php';
 
-        $config = [
-            'filename_type' => 'md5_file', 'root_path' => __DIR__.'/test-files', 'max_size' => '10m',
-            'mimes' => ['image/jpeg', 'image/png', 'image/bmp', 'image/gif'], ];
-
-        $this->assertFalse(UploadResolver::resolveFromRequest($config, $file)->isValidMime());
+        $this->assertFalse(UploadResolver::resolveFromRequest($config['validMimes']['config'], $config['validMimes']['file'])->isValidMime());
     }
 }
