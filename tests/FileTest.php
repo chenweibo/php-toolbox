@@ -9,7 +9,7 @@ class FileTest extends TestCase
 {
     public function testUnzip()
     {
-        $config = include __DIR__ . '/config.php';
+        $config = include __DIR__.'/config.php';
         $system = FileResolver::config($config['base']['config']);
 
         $this->assertTrue($system->unzip('un.zip', 'unzip'));

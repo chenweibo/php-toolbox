@@ -108,7 +108,7 @@ class File
      */
     public function files($path)
     {
-        $oppositePath = $this->adapterPath . '/' . $path;
+        $oppositePath = $this->adapterPath.'/'.$path;
 
         return array_diff(\scandir($oppositePath), ['..', '.']);
     }
@@ -172,23 +172,29 @@ class File
         $zip = new \ZipArchive();
 
         if ($this->mimeTypes('zip') == 'directory') {
-
         }
-
     }
 
-    public function unzip($path, $to = "")
+    public function isValidZip($path)
     {
+        if ($this->mimeTypes($path) != 'application/zip') {
+            throw new \Exception(\sprintf('no support  ("%s").', $this->mimeTypes($path)));
+        }
+    }
+
+    public function unzip($path, $to = '')
+    {
+        $this->isValidZip($path);
         if ($this->has($path)) {
             $zip = new \ZipArchive();
-            if ($zip->open($this->adapterPath . '/' . $path) === true) {
-                $zip->extractTo($this->adapterPath . '/' . $to);
+            if ($zip->open($this->adapterPath.'/'.$path) === true) {
+                $zip->extractTo($this->adapterPath.'/'.$to);
                 $zip->close();
-                return true;
-            } else {
-                return false;
-            }
-        }
 
+                return true;
+            }
+
+            return false;
+        }
     }
 }
