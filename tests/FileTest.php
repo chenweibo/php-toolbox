@@ -18,7 +18,7 @@ class FileTest extends TestCase
     public function testFiles()
     {
         $config = include __DIR__.'/config.php';
-        $system = FileResolver::config($config['base']['config'])->files('');
+        $system = FileResolver::config($config['base']['config'])->files('upload');
         //var_dump($system);
         $this->assertTrue(true);
     }
