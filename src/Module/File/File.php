@@ -113,11 +113,19 @@ class File
         return $this->handleFilesList($fileList);
     }
 
+    /**
+     * Get all files in a directory.
+     *
+     * @param string $path
+     *
+     * @return array
+     * @throws FileNotFoundException
+     */
     public function handleFilesList(array $list)
     {
         $files = [];
         foreach ($list as $v) {
-            $files[] = ['name' => $v, 'mime' => $this->mimeTypes($v), 'size' => $this->size($v)];
+            $files[] = ['name' => $v, 'mime' => \is_dir($this->getFullPath($v)) ? 'directory' : $this->mimeTypes($v), 'size' => \is_dir($this->getFullPath($v)) ? null : $this->size($v)];
         }
 
         return $files;
@@ -126,7 +134,7 @@ class File
     public function getFullPath($path)
     {
         if ($path) {
-            return $this->adapterPath.'/'.$path;
+            return $this->adapterPath . '/' . $path;
         }
 
         return $this->adapterPath;
@@ -206,8 +214,8 @@ class File
         $this->isValidZip($path);
         if ($this->has($path)) {
             $zip = new \ZipArchive();
-            if ($zip->open($this->adapterPath.'/'.$path) === true) {
-                $zip->extractTo($this->adapterPath.'/'.$to);
+            if ($zip->open($this->adapterPath . '/' . $path) === true) {
+                $zip->extractTo($this->adapterPath . '/' . $to);
                 $zip->close();
 
                 return true;
