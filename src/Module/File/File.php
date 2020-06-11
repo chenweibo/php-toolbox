@@ -35,10 +35,10 @@ class File
      * @param string $from
      * @param string $to
      *
-     * @return bool $response
-     *
      * @throws FileNotFoundException
      * @throws FileExistsException
+     *
+     * @return bool $response
      */
     public function rename($from, $to)
     {
@@ -63,10 +63,10 @@ class File
      * @param string $from
      * @param string $to
      *
-     * @return bool $response
-     *
      * @throws FileNotFoundException
      * @throws FileExistsException
+     *
+     * @return bool $response
      */
     public function copy($from, $to)
     {
@@ -90,9 +90,9 @@ class File
      *
      * @param string $path
      *
-     * @return bool $response
-     *
      * @throws FileNotFoundException
+     *
+     * @return bool $response
      */
     public function getTimestamp($path)
     {
@@ -104,9 +104,9 @@ class File
      *
      * @param string $path
      *
-     * @return bool
-     *
      * @throws FileNotFoundException
+     *
+     * @return bool
      */
     public function delete($path)
     {
@@ -118,9 +118,9 @@ class File
      *
      * @param string $path
      *
-     * @return array
-     *
      * @throws FileNotFoundException
+     *
+     * @return array
      */
     public function files($path)
     {
@@ -134,9 +134,9 @@ class File
      *
      * @param string $path
      *
-     * @return array
-     *
      * @throws FileNotFoundException
+     *
+     * @return array
      */
     public function handleFilesList(array $list, $path)
     {
@@ -163,9 +163,9 @@ class File
      *
      * @param string $path
      *
-     * @return string
-     *
      * @throws FileNotFoundException
+     *
+     * @return string
      */
     public function readFiles($path)
     {
@@ -177,9 +177,9 @@ class File
      *
      * @param string $path
      *
-     * @return string
-     *
      * @throws FileNotFoundException
+     *
+     * @return string
      */
     public function readStreamFiles($path)
     {
@@ -191,9 +191,9 @@ class File
      *
      * @param string $path
      *
-     * @return bool
-     *
      * @throws FileNotFoundException
+     *
+     * @return bool
      */
     public function updateFiles($path, $contents)
     {
@@ -241,9 +241,9 @@ class File
      *
      * @param string $path
      *
-     * @return string|false
-     *
      * @throws FileNotFoundException
+     *
+     * @return string|false
      */
     public function mimeTypes($path)
     {
@@ -255,9 +255,9 @@ class File
      *
      * @param string $path
      *
-     * @return string|false
-     *
      * @throws FileNotFoundException
+     *
+     * @return string|false
      */
     public function size($path)
     {
