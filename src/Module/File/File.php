@@ -35,10 +35,10 @@ class File
      * @param string $from
      * @param string $to
      *
-     * @throws FileExistsException
-     * @throws FileNotFoundException
-     *
      * @return bool $response
+     *
+     * @throws FileNotFoundException
+     * @throws FileExistsException
      */
     public function rename($from, $to)
     {
@@ -63,10 +63,10 @@ class File
      * @param string $from
      * @param string $to
      *
-     * @throws FileExistsException
-     * @throws FileNotFoundException
-     *
      * @return bool $response
+     *
+     * @throws FileNotFoundException
+     * @throws FileExistsException
      */
     public function copy($from, $to)
     {
@@ -86,13 +86,27 @@ class File
     }
 
     /**
+     * This function returns the last updated timestamp.
+     *
+     * @param string $path
+     *
+     * @return bool $response
+     *
+     * @throws FileNotFoundException
+     */
+    public function getTimestamp($path)
+    {
+        return $this->filesystem->getTimestamp($path);
+    }
+
+    /**
      * Delete Files or Directories.
      *
      * @param string $path
      *
-     * @throws FileNotFoundException
-     *
      * @return bool
+     *
+     * @throws FileNotFoundException
      */
     public function delete($path)
     {
@@ -105,6 +119,8 @@ class File
      * @param string $path
      *
      * @return array
+     *
+     * @throws FileNotFoundException
      */
     public function files($path)
     {
@@ -118,9 +134,9 @@ class File
      *
      * @param string $path
      *
-     * @throws FileNotFoundException
-     *
      * @return array
+     *
+     * @throws FileNotFoundException
      */
     public function handleFilesList(array $list, $path)
     {
@@ -147,13 +163,65 @@ class File
      *
      * @param string $path
      *
-     * @throws FileNotFoundException
-     *
      * @return string
+     *
+     * @throws FileNotFoundException
      */
     public function readFiles($path)
     {
         return $this->filesystem->read($path);
+    }
+
+    /**
+     * Read Files as a stream.
+     *
+     * @param string $path
+     *
+     * @return string
+     *
+     * @throws FileNotFoundException
+     */
+    public function readStreamFiles($path)
+    {
+        return $this->filesystem->readStream($path);
+    }
+
+    /**
+     * Update Files.
+     *
+     * @param string $path
+     *
+     * @return bool
+     *
+     * @throws FileNotFoundException
+     */
+    public function updateFiles($path, $contents)
+    {
+        return $this->filesystem->update($path, $contents);
+    }
+
+    /**
+     * Write or Update Files.
+     *
+     * @param string $path
+     *
+     * @return bool
+     */
+    public function putFiles($path, $contents)
+    {
+        return $this->filesystem->put($path, $contents);
+    }
+
+    /**
+     * Write or Update Files using a stream.
+     *
+     * @param string $path
+     *
+     * @return bool
+     */
+    public function putStreamFiles($path, $contents)
+    {
+        return $this->filesystem->putStream($path, $contents);
     }
 
     /**
@@ -173,9 +241,9 @@ class File
      *
      * @param string $path
      *
-     * @throws FileNotFoundException
-     *
      * @return string|false
+     *
+     * @throws FileNotFoundException
      */
     public function mimeTypes($path)
     {
@@ -187,9 +255,9 @@ class File
      *
      * @param string $path
      *
-     * @throws FileNotFoundException
-     *
      * @return string|false
+     *
+     * @throws FileNotFoundException
      */
     public function size($path)
     {
